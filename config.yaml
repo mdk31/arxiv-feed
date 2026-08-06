@@ -18,6 +18,6 @@ paths:
 
 feed:
   title: "arxiv, filtered"
-  link: "https://REPLACE_WITH_USERNAME.github.io/arxiv-feed/feed.xml"
+  link: "https://mdk31.github.io/arxiv-feed/published/feed.xml"
   description: "Daily arxiv papers filtered for relevance by a local LLM"
   window_size: 150
