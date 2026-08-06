@@ -1,0 +1,23 @@
+categories:
+  - cs.AI
+  - cs.CL
+  - cs.LG
+  - stat.ML
+
+ollama:
+  host: http://localhost:11434
+  model: qwen2.5:3b-instruct
+  max_workers: 1
+
+paths:
+  interest_profile: interest_profile.md
+  seen_ids: state/seen_ids.json
+  published_items: state/published_items.json
+  feed_output: published/feed.xml
+  log_file: state/run.log
+
+feed:
+  title: "arxiv, filtered"
+  link: "https://REPLACE_WITH_USERNAME.github.io/arxiv-feed/feed.xml"
+  description: "Daily arxiv papers filtered for relevance by a local LLM"
+  window_size: 150

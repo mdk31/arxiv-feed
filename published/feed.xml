@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>arxiv, filtered</title>
+    <link>https://REPLACE_WITH_USERNAME.github.io/arxiv-feed/feed.xml</link>
+    <description>Daily arxiv papers filtered for relevance by a local LLM</description>
+    <atom:link href="https://REPLACE_WITH_USERNAME.github.io/arxiv-feed/feed.xml" rel="self"/>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <lastBuildDate>Thu, 06 Aug 2026 22:03:24 +0000</lastBuildDate>
+    <item>
+      <title>WorldCup Arena: Prospective, Leakage-Free Evaluation of Frontier LLMs on a Live Tournament</title>
+      <link>https://arxiv.org/abs/2608.04008</link>
+      <description>Benchmarks that measure the forecasting ability of large language models are almost always retrospective: the event has happened, the answer is somewhere on the Web, and the evaluation must defend itself against memorisation. We report the opposite design. Over the 39 days of the 2026 FIFA World Cup, six frontier LLMs -- all with extended thinking and native server-side web search -- were asked before every kickoff, one match at a time, to fill in a seven-market prediction card for all 104 matches, plus 12 group winners and a pre-tournament outright pool; no answer existed when the question was asked, so the evaluation is leakage-free by construction rather than by filtering, and the frozen archive holds 4,494 scored predictions. What the tournament establishes is a set of behaviours the six systems share. On match outcome they average 63.9%, level with backing the bookmaker's favourite -- which is in fact what they usually do. They agree with one another far more often than they are right, so a majority vote adds nothing. They under-commit to draws and to goals, and crowd their scoreline picks onto a single prototypical result. Accuracy tracks how lopsided a fixture is rather than how much is known about it: it collapses in the closest ties, where the dossiers are richest, while questions about the tournament as a whole are answered well. On this task the current generation of frontier systems is not sharply differentiated: the standings hold up at the top and the bottom across the run and churn in the middle, and the margins stay narrow throughout. The briefing dossiers, fixtures and official results are released as a benchmark, together with the scoring code.
+
+Authors: Zhenran Wang, Zhonghan Bian, Jinsong Li, Zhangyang Qi</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.04008</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>How Closely Do LLM Reviews Align with Human Peer Review?</title>
+      <link>https://arxiv.org/abs/2608.03659</link>
+      <description>Large language models (LLMs) are increasingly used to generate scientific reviews, yet existing evaluations rarely examine whether different providers align with both conference decisions and human reviewing priorities within the same controlled setting. We compare reviews from OpenAI GPT-5.4, Google Gemini 3.1 Pro Preview, and Anthropic Claude Opus 4.6 with human reviews and final decisions for 300 topic-matched ICLR 2026 submissions, equally divided among oral, poster, and rejected papers. Each model reviewed every paper using identical instructions and rating scales after decision information was removed. Our study contributes a cross-provider analysis of three complementary dimensions: alignment with broad and fine-grained decision categories, differences in recommendation-scale usage, and thematic agreement in identified weaknesses. All three LLMs distinguished accepted from rejected papers, but none reproduced the oral versus poster distinction present in human ratings. Scoring patterns were provider-specific: Gemini assigned systematically higher ratings, while OpenAI and Claude were closer to humans for rejected and poster papers but more critical of oral papers. Human and LLM reviews also differed in emphasis, with LLMs more frequently identifying missing baseline comparisons and humans more often raising computational-efficiency concerns. These results show that broad decision alignment does not imply agreement with finer human judgments or reviewing priorities.
+
+Authors: Abraham Camelo-Guerrero, Jairo Diaz-Rodriguez</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.03659</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>VIVID: A Culturally Grounded Benchmark Exposing the Figurative Language Gap in Vietnamese NLP</title>
+      <link>https://arxiv.org/abs/2608.03095</link>
+      <description>We present VIVID (Vietnamese Idioms for Validation and Interpretation Depth), the first systematic benchmark for evaluating culturally grounded figurative language understanding in Vietnamese. VIVID comprises 1,636 idioms and proverbs annotated with five complexity traits (literal expressions, pragmatic nuances, Sino-Vietnamese terms, uncommon vocabulary, folk knowledge) and seven semantic themes. We establish an evaluation framework combining generative and discriminative tasks, proposing an LLM-as-a-Judge approach with aspect-based prompting validated against human judgment (Cohen's kappa = 0.792). Evaluating eight state-of-the-art models reveals critical gaps: Vietnamese-specialized models drastically underperform multilingual systems (VinaLLaMA-7B: 0.13 vs. GPT-4o: 2.46), and even top models achieve less than 50% of maximum scores. Notably, few-shot prompting does not universally improve performance, with GPT-4o exhibiting degradation due to stylistic overfitting. Our analysis exposes systematic failures including literal over-interpretation, lexical gaps, and pragmatic flattening, demonstrating that current models lack cultural competence for nuanced figurative interpretation. VIVID provides an essential tool for advancing figurative language understanding in culturally rich contexts.
+
+Authors: Tu Tran Do, Nhat Ngoc Nguyen, Khanh-Tung Tran, Hoang D. Nguyen, Tu Minh Phuong, Long Hoang Dang</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.03095</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>Language Models Encode the Contextual Truth of Propositions</title>
+      <link>https://arxiv.org/abs/2608.03035</link>
+      <description>Prior work has shown that LLMs encode the truth of factual propositions along linear directions in activation space. It's unclear how these representations extend to contextual truth: propositions whose truth is determined by in-context evidence rather than world knowledge. We show that LLMs maintain a linear representation of contextual truth that persists across structurally different output policies, even when the output doesn't require the model to determine a proposition's truth, and show causal evidence via steering experiments. Using the transcripts from a collaborative vision-language task that requires two LLMs to maintain a shared common ground, we show that truth representations of a proposition are significantly swayed by partner assertions about that proposition, even when the LLM has enough evidence to determine its truth. We find evidence that propositions near the decision boundary are more susceptible to having their truth shifted through partner assertions. Separating representation from output distinguish two forms of sycophancy that output behavior alone cannot: the model may accommodate a false proposition while continuing to represent it as false, or shift its representation across the boundary. The latter is 2.59x more common when the model agrees by restating the false claim explicitly than when it agrees implicitly.
+
+Authors: Rupak Sarkar, Pritika Ramu, Rachel Rudinger</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.03035</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>Every Wrong Answer Counts: Option-Level Psychometrics for LLM Multiple-Choice Benchmarks</title>
+      <link>https://arxiv.org/abs/2608.02966</link>
+      <description>Most multiple-choice question (MCQ) benchmarks evaluate Large Language Models (LLMs) only by whether they select the correct answers. This binary scoring treats all incorrect responses alike, even though an LLM's preferences among incorrect options may contain systematic and useful information about its behavior and ability. We introduce the LLM Nominal Response Model (LLM-NRM), an option-aware psychometric framework that models the full distribution over answer choices to jointly estimate LLM ability and option-level item characteristics, while separating model-specific response calibration sharpness, positional preference, and difficulty-dependent fallback behavior. Across 189 LLMs and 31,554 items from 14 benchmarks, LLM-NRM predicts held-out LLM-item interactions more accurately than binary Item Response models and conventional nominal-response baselines, and its ability estimates achieve the strongest Spearman correlation of 0.920 with the external human-preference Arena.ai Elo leaderboard. Distractor identity contributes +101% additional Fisher Information per item beyond correctness, and incorrect responses alone recover full-information ability estimates with Spearman 0.943. The learned item parameters also enable efficient benchmarking, where 41 selected items preserve the full-bank ranking with Kendall's correlation 0.85, corresponding to a 770 times reduction. In conclusion, we show that incorrect answers carry distinct and useful measurement information rather than representing equivalent mistakes.
+
+Authors: Xiao Fei, Yang Zhang, Sarah Almeida Carneiro, Michalis Vazirgiannis</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.02966</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>JudgeArena: A Unified Framework for Reproducible LLM-Judge Evaluation</title>
+      <link>https://arxiv.org/abs/2608.02620</link>
+      <description>LLM-as-a-judge evaluation has become a dominant paradigm for ranking language models, yet the ecosystem remains fragmented: most benchmarks ship their own code base, hardcode a specific closed-model judge, and support a single evaluation protocol. This fragmentation makes it difficult to study how design choices--the benchmark, the judge model, the prompt, the inference backend--affect the conclusions we draw about model quality. We introduce JudgeArena, an open-source framework that unifies major LLM-judge benchmarks (AlpacaEval, Arena-Hard, MT-Bench, and m-Arena-Hard) under a single interface with swappable judges and comprehensive metadata logging for increased transparency in reporting and reproducibility. It enables systematic studies of judge choices, as any model accessible via vLLM, llama.cpp, or OpenRouter can serve as both candidate and judge. Furthermore, JudgeArena ships with tuned judge configurations for open models that match or outperform closed-model judges, validated on human preference datasets in both English and multilingual settings, reducing the reliance on opaque closed models. Finally, by combining existing human annotations with LLM-judge evaluations of a target model, JudgeArena can simulate LMArena Elo scores with high accuracy offering a practical, open, and low-cost alternative to large-scale human annotation campaigns.
+
+Authors: Erlis Lushtaku, Bora Kargi, Ali Elganzory, Fabio Ferreira, Alejandro R. Salamanca, Julia Kreutzer, David Salinas</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.02620</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>SciCode-Verified: How Benchmark Defects Underestimated the Scientific-Coding Ability of Language Models</title>
+      <link>https://arxiv.org/abs/2608.04975</link>
+      <description>SciCode is the standard measure of the scientific-coding ability of language models: research-level problems that demand both frontier scientific theory and its implementation as working numerical code. It is a component of the Artificial Analysis Intelligence Index and a standing evaluation in government and national-laboratory suites. Yet its scores have recently plateaued: the strongest 2026 models cluster tightly around 60\% subproblem accuracy, and a successor model ties its predecessor. We trace this stagnation to defects in the benchmark itself. A per-problem, domain-expert audit of all 65 test problems uncovers 263 defects; 192 of them, spread across 91\% of the main problems, cause correct, instruction-following solutions to be wrongly rejected---through non-reproducible gold answers, over-tight tolerances, or self-contradictory specifications. Critically, 78\% of these score-suppressing defects require specialized physics or mathematics knowledge to detect, not mere clerical proofreading. We corrected every confirmable defect to produce SciCode-Verified. The corrections add only the specifications a well-posed problem requires, repair grading, and tighten the tests that were too lenient; every change is recorded with its justification and independently re-checked by a second domain expert. We re-evaluate twelve frontier model snapshots on the corrected benchmark and find a substantial recovery: subproblem accuracy rises from 45--60\% to 84--98\%, and main-problem accuracy from 9--27\% to 69--92\%. State-of-the-art models are far more proficient in scientific coding than SciCode has suggested---the bottleneck was not model capability, but the quality of the evaluation instrument. We release SciCode-Verified with its complete audit trail as the corrected public standard.
+
+Authors: Sihan Hu, Lyuhan Huang, Youjin Deng, Kun Chen</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.04975</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>RepoProbe: Benchmarking Architecture-Aware Repository Comprehension with Checklists</title>
+      <link>https://arxiv.org/abs/2608.04783</link>
+      <description>The integration of Large Language Models (LLMs) into software engineering has shifted the focus from function-level generation to repository-scale assistance. However, existing benchmarks largely rely on bug reports from GitHub Issues, which often allow models to bypass genuine understanding via pattern matching on error logs. This misalignment under-measures Edit Bias, which refers to premature generation, where models prematurely propose code modifications instead of understanding the existing repository architecture. Furthermore, current LLM-as-a-Judge scalar scoring suffers from high variance and low interpretability. This work introduces RepoProbe, a novel benchmark for evaluating repository-level code understanding through open-ended Q&amp;amp;A using GitHub Discussions, which focuses on open-ended architectural inquiries rather than defect reporting. To ensure rigorous evaluation, we propose a Checklist-Based Verification Protocol that decomposes answers into atomic, verifiable facts, thereby replacing subjective ratings with objective verification. Our evaluation of state-of-the-art (SOTA) LLMs reveals a persistent gap between high clarity and evidencegrounded technical correctness. It also quantitatively confirms the prevalence of edit bias, in which models prioritize code generation instead of architectural analysis. Finally, we demonstrate that our verification protocol significantly improves evaluation reliability compared to traditional evaluations with scalar scoring.
+
+Authors: Yuexi Yang, Alyssa Wu, Ji Luo, Richeng Xuan, Zhichao Hu, Yuhong Liu, Zhen Qin</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.04783</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>EuroExec: Frontier Language Models Fall Short of Expert Judgment on European Executive Decision Tasks</title>
+      <link>https://arxiv.org/abs/2608.04549</link>
+      <description>Frontier LLMs are increasingly put to use on open-ended complex questions, different in nature from the ones they are typically evaluated on. We dedicate more than 4,000 human expert hours to evaluate a selection of six frontier LLMs on a member of this class of problems: EuroExec, our introduced human expert-based benchmark composed of 413 open-ended long-form European executive tasks authored by 47 vetted domain experts, each question drawn from experience in a real case. Every response is manually evaluated through a multi-attribute rubric, an item-specific checklist of requirements, and a preference rank ordering, extracting an aggregate metric "Solve Rate". The strongest model solves only 56.9% of tasks, while expert-written reference answers judged blindly are solved at near-ceiling levels and are preferred over every model response in 74% of direct rankings, placing frontier generative systems well below the professional standard of work they are already used for. We see that the best way to extract this kind of conclusion is by employing human evaluators, carefully checking their consistency through rigorous statistical analysis, and observe that automatic measurements also fall short when evaluating on this case of real-world open-ended problems with a subjective ground truth.
+
+Authors: Pau Arnal, Khaled Denfir, Danylo Smahliuk, Amrut Avhad, Marcus A. Castro</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.04549</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+    <item>
+      <title>Hallucinations on the Board: Tool-Augmented Evaluation of LLM Chess Commentary</title>
+      <link>https://arxiv.org/abs/2608.04240</link>
+      <description>Superhuman game engines in domains like chess have made expert-level evaluations easily accessible, yet they communicate what is true without the natural-language explanations that make such expertise educationally useful to experts and non-experts alike. Large language models could, in principle, bridge this gap, but they frequently hallucinate due to limited domain-specific knowledge, and standard reference-based or LLM-as-a-judge frameworks cannot reliably detect these errors. In this work, we present ACT-Eval, an evaluation framework that decomposes chess commentary into atomic claims and routes them to engine-supported tools and expert-annotated gold references to assess factual correctness, conceptual coverage, and move-quality judgment. We release a benchmark of 325 position--move pairs spanning pedagogical, tournament, and critical positions, including 125 positions with expert-verified gold atoms and a five-class error taxonomy. Evaluating leading proprietary and open-weight models, we find that factual hallucinations remain pervasive in chess commentary: GPT-5.4 without tools produces incorrect sub-claims 22.0% of the time, while smaller open-weight models exceed 40%. Although tool augmentation substantially improves factual correctness and move-quality assessment, coverage of expert strategic and tactical ideas remains limited across all models. Human calibration shows that ACT-Eval's factual judgments fall within the observed range of inter-human agreement, while its coverage scores correlate strongly with human assessments of strategic completeness.
+
+Authors: S. Ashwin Hebbar, Peiyao Sheng, Sewoong Oh, Pramod Viswanath</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.04240</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
+    </item>
+  </channel>
+</rss>
