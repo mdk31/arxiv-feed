@@ -38,11 +38,14 @@ def _domain_pattern(domain):
 
 
 _ABSTRACT_SPLIT = re.compile(r"\babstract\b", re.IGNORECASE)
+_FALLBACK_HEADER_CHARS = 1200
 
 
 def extract_header_text(page_text):
     match = _ABSTRACT_SPLIT.search(page_text)
-    return page_text[: match.start()] if match else page_text
+    if match:
+        return page_text[: match.start()]
+    return page_text[:_FALLBACK_HEADER_CHARS]
 
 
 def match_institutions(page_text, institutions):

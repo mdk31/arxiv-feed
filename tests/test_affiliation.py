@@ -35,9 +35,22 @@ class ExtractHeaderTextTests(unittest.TestCase):
         text = "Title\nAuthor\nABSTRACT\nMentions Meta here."
         self.assertNotIn("Meta", affiliation.extract_header_text(text))
 
-    def test_no_abstract_marker_returns_full_text(self):
+    def test_no_abstract_marker_returns_full_short_text(self):
         text = "Title\nAuthor, Some Univ, no heading marker present here"
         self.assertEqual(affiliation.extract_header_text(text), text)
+
+    def test_no_abstract_marker_caps_long_text(self):
+        # some paper templates start the abstract text directly under the
+        # author block with no literal "Abstract" heading word at all - a
+        # real paper matched "Microsoft" from a citation deep in its
+        # introduction ("...losses (Microsoft, 2024)") because the
+        # unbounded fallback searched the entire page in that case.
+        header = "Title\nAuthor, Some Univ\n"
+        body = "word " * 400  # far past the fallback cap
+        text = header + body + "mentions Microsoft here"
+        result = affiliation.extract_header_text(text)
+        self.assertNotIn("Microsoft", result)
+        self.assertLessEqual(len(result), 1200)
 
 
 class MatchInstitutionsTests(unittest.TestCase):

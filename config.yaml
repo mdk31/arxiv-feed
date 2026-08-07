@@ -3,6 +3,7 @@ categories:
   - cs.CL
   - cs.LG
   - stat.ML
+  - stat.ME
 
 affiliation:
   institutions_file: institutions.yaml
