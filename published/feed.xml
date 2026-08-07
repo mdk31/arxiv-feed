@@ -7,7 +7,15 @@
     <atom:link href="https://mdk31.github.io/arxiv-feed/published/feed.xml" rel="self"/>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Fri, 07 Aug 2026 13:18:42 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 22:14:08 +0000</lastBuildDate>
+    <item>
+      <title>Improving the efficiency of infectious disease prevention trials using negative control outcome event times</title>
+      <link>https://arxiv.org/abs/2608.05261</link>
+      <description>Baseline covariate adjustment can enhance the efficiency of randomized trials by improving precision of treatment effect estimates. However, the precision gain depends on how strongly the baseline covariates are prognostic for the primary outcome. In randomized trials of infectious disease prevention interventions (e.g., vaccines or passively administered antibodies), an individual's exposure to the pathogen is a leading prognostic factor but is rarely measurable at baseline. Hence, conventional covariate adjustment offers limited precision gain in prevention trials. We propose adjusting for a negative control outcome (NCO) event time, which is causally unaffected by the intervention but shares overlapping exposure mechanisms with the primary outcome. We formalize assumptions under which adjustment for the NCO event time is valid, and show that right-censoring of the NCO event time further complicates adjustment. We derive the efficient influence function for the treatment-arm-specific survivor function of the primary outcome when both the primary outcome and the NCO event time are right-censored, and use it to construct a cross-fitted, one-step estimator that is multiply robust to nuisance misspecification and asymptotically efficient when the nuisances are estimated accurately. In numerical experiments, our estimator compares comparably to benchmarks when the NCO event time is uninformative, and gains precision as the NCO event time is more prognostic for the primary outcome. We apply our method to HVTN 704/HPTN 085, a randomized, double-blinded trial of VRC01, a broadly neutralizing antibody against HIV-1. Adjusting for the time to a bacterial sexually transmitted infection --- a negative control outcome for HIV-1 acquisition --- reduced the estimated variance of the prevention efficacy estimate by approximately 27%, compared to roughly 2.5% for baseline covariate adjustment.</description>
+      <guid isPermaLink="false">https://arxiv.org/abs/2608.05261</guid>
+      <pubDate>Fri, 07 Aug 2026 22:13:32 +0000</pubDate>
+      <dc:creator>Ethan Ashby, Zhewei Zhang, Tanya P. Garcia, Ting Ye, Holly Janes, Bo Zhang</dc:creator>
+    </item>
     <item>
       <title>Optimal Rates for Learning with Monotone Adversaries</title>
       <link>https://arxiv.org/abs/2608.06337</link>
