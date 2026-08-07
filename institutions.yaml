@@ -100,5 +100,5 @@ industry:
     aliases: ["Amazon Science", "AWS AI"]
     domains: ["amazon.com"]
   Apple:
-    aliases: ["Apple Inc", "Apple, Inc"]
+    aliases: ["Apple Inc", "Apple, Inc", "Apple"]
     domains: ["apple.com"]

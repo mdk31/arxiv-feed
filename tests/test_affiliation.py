@@ -98,59 +98,12 @@ class MatchInstitutionsTests(unittest.TestCase):
         self.assertEqual(affiliation.match_institutions(text, INSTITUTIONS), [])
 
 
-class NameHelperTests(unittest.TestCase):
-    def test_normalize_name_lowercases_and_collapses_whitespace(self):
-        self.assertEqual(affiliation.normalize_name("  Jane   Doe "), "jane doe")
-
+class SplitAuthorsTests(unittest.TestCase):
     def test_split_authors_splits_on_comma(self):
         self.assertEqual(affiliation.split_authors("Jane Doe, John Smith"), ["Jane Doe", "John Smith"])
 
     def test_split_authors_empty_string(self):
         self.assertEqual(affiliation.split_authors(""), [])
-
-
-class LedgerTests(unittest.TestCase):
-    def test_check_ledger_finds_known_author(self):
-        ledger = {"jane doe": {"name": "Jane Doe", "institutions": ["Stanford University"], "seen_on": ["1234.5678"]}}
-        authors, institutions = affiliation.check_ledger("Jane Doe, John Smith", ledger)
-        self.assertEqual(authors, ["Jane Doe"])
-        self.assertEqual(institutions, ["Stanford University"])
-
-    def test_check_ledger_no_match_returns_empty(self):
-        authors, institutions = affiliation.check_ledger("Jane Doe", {})
-        self.assertEqual(authors, [])
-        self.assertEqual(institutions, [])
-
-    def test_update_ledger_adds_new_author(self):
-        ledger = {}
-        affiliation.update_ledger(ledger, "Jane Doe, John Smith", ["Stanford University"], "1234.5678")
-        self.assertIn("jane doe", ledger)
-        self.assertIn("john smith", ledger)
-        self.assertEqual(ledger["jane doe"]["institutions"], ["Stanford University"])
-        self.assertEqual(ledger["jane doe"]["seen_on"], ["1234.5678"])
-
-    def test_update_ledger_no_institutions_is_noop(self):
-        ledger = {}
-        affiliation.update_ledger(ledger, "Jane Doe", [], "1234.5678")
-        self.assertEqual(ledger, {})
-
-    def test_update_ledger_accumulates_institutions_across_papers(self):
-        ledger = {}
-        affiliation.update_ledger(ledger, "Jane Doe", ["Stanford University"], "1111.1111")
-        affiliation.update_ledger(ledger, "Jane Doe", ["Meta"], "2222.2222")
-        self.assertEqual(set(ledger["jane doe"]["institutions"]), {"Stanford University", "Meta"})
-        self.assertEqual(ledger["jane doe"]["seen_on"], ["1111.1111", "2222.2222"])
-
-    def test_save_then_load_round_trips(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            path = os.path.join(tmp, "sub", "ledger.json")
-            ledger = {"jane doe": {"name": "Jane Doe", "institutions": ["MIT"], "seen_on": ["1234.5678"]}}
-            affiliation.save_researcher_ledger(path, ledger)
-            loaded = affiliation.load_researcher_ledger(path)
-            self.assertEqual(loaded, ledger)
-
-    def test_load_missing_file_returns_empty_dict(self):
-        self.assertEqual(affiliation.load_researcher_ledger("/nonexistent/path/ledger.json"), {})
 
 
 class LoadInstitutionsTests(unittest.TestCase):

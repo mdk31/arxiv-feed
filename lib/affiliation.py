@@ -1,4 +1,3 @@
-import json
 import logging
 import os
 import re
@@ -58,51 +57,10 @@ def match_institutions(page_text, institutions):
     return matched
 
 
-def normalize_name(name):
-    return " ".join(name.strip().lower().split())
-
-
 def split_authors(authors_str):
     if not authors_str:
         return []
     return [a.strip() for a in authors_str.split(",") if a.strip()]
-
-
-def load_researcher_ledger(path):
-    if not os.path.exists(path):
-        return {}
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_researcher_ledger(path, ledger):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(ledger, f, indent=2, ensure_ascii=False)
-
-
-def check_ledger(authors_str, ledger):
-    matched_authors = []
-    matched_institutions = set()
-    for name in split_authors(authors_str):
-        entry = ledger.get(normalize_name(name))
-        if entry:
-            matched_authors.append(name)
-            matched_institutions.update(entry["institutions"])
-    return matched_authors, sorted(matched_institutions)
-
-
-def update_ledger(ledger, authors_str, matched_institutions, arxiv_id):
-    if not matched_institutions:
-        return
-    for name in split_authors(authors_str):
-        key = normalize_name(name)
-        entry = ledger.setdefault(key, {"name": name, "institutions": [], "seen_on": []})
-        for inst in matched_institutions:
-            if inst not in entry["institutions"]:
-                entry["institutions"].append(inst)
-        if arxiv_id not in entry["seen_on"]:
-            entry["seen_on"].append(arxiv_id)
 
 
 def download_pdf(arxiv_id, dest_path, timeout=20):
@@ -132,19 +90,9 @@ def check_pdf(arxiv_id, scratch_dir, institutions, timeout=20):
     return match_institutions(page_text, institutions)
 
 
-def check_affiliation(paper, institutions, ledger, scratch_dir, timeout=20):
+def check_affiliation(paper, institutions, scratch_dir, timeout=20):
     authors_str = paper.get("authors", "")
     arxiv_id = paper["arxiv_id"]
-
-    ledger_authors, ledger_institutions = check_ledger(authors_str, ledger)
-    if ledger_institutions:
-        return {
-            "included": True,
-            "matched_institutions": ledger_institutions,
-            "matched_authors": ledger_authors,
-            "via": "ledger",
-            "error": None,
-        }
 
     try:
         matched = check_pdf(arxiv_id, scratch_dir, institutions, timeout=timeout)
@@ -153,17 +101,12 @@ def check_affiliation(paper, institutions, ledger, scratch_dir, timeout=20):
             "included": False,
             "matched_institutions": [],
             "matched_authors": [],
-            "via": "pdf",
             "error": str(exc),
         }
-
-    if matched:
-        update_ledger(ledger, authors_str, matched, arxiv_id)
 
     return {
         "included": bool(matched),
         "matched_institutions": matched,
         "matched_authors": split_authors(authors_str) if matched else [],
-        "via": "pdf",
         "error": None,
     }

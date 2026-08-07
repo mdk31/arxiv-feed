@@ -12,7 +12,6 @@ affiliation:
 paths:
   seen_ids: state/seen_ids.json
   published_items: state/published_items.json
-  researcher_ledger: state/researcher_ledger.json
   feed_output: published/feed.xml
   log_file: state/run.log
   pdf_scratch_dir: state/pdf_scratch

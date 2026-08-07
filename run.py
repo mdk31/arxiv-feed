@@ -31,9 +31,6 @@ def setup_logging(log_path):
 
 
 def write_last_run(path, summary):
-    """Overwritten every run - the one file to check for "did it run today"
-    without digging through the full run.log history.
-    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
@@ -49,7 +46,6 @@ def main():
 
     aff_config = config["affiliation"]
     institutions = affiliation.load_institutions(REPO_DIR / aff_config["institutions_file"])
-    ledger = affiliation.load_researcher_ledger(REPO_DIR / paths["researcher_ledger"])
     scratch_dir = REPO_DIR / paths["pdf_scratch_dir"]
     pdf_timeout = aff_config["pdf_fetch_timeout_seconds"]
     pdf_delay = aff_config["pdf_fetch_delay_seconds"]
@@ -70,41 +66,31 @@ def main():
     window_size = config["feed"]["window_size"]
 
     included_count = 0
-    ledger_hits = 0
-    pdf_hits = 0
     pdf_errors = 0
 
     for paper in new_papers:
-        result = affiliation.check_affiliation(paper, institutions, ledger, scratch_dir, timeout=pdf_timeout)
+        result = affiliation.check_affiliation(paper, institutions, scratch_dir, timeout=pdf_timeout)
+        time.sleep(pdf_delay)
 
-        if result["via"] == "pdf":
-            time.sleep(pdf_delay)  # only real downloads get rate-limited, ledger hits are free
-            if result["error"]:
-                pdf_errors += 1
-                log.warning("pdf fetch/parse failed for %s, leaving unseen for retry next run: %s", paper["arxiv_id"], result["error"])
-                continue  # not recorded as seen - retried next run
-            pdf_hits += 1 if result["included"] else 0
-        elif result["via"] == "ledger":
-            ledger_hits += 1
+        if result["error"]:
+            pdf_errors += 1
+            log.warning("pdf fetch/parse failed for %s, leaving unseen for retry next run: %s", paper["arxiv_id"], result["error"])
+            continue  # not recorded as seen - retried next run
 
         judged_at = datetime.now(timezone.utc).isoformat()
         store.record_seen(seen_ids, paper["arxiv_id"], result["included"], judged_at)
 
         if result["included"]:
             included_count += 1
-            reason = f"{result['via']}: {', '.join(result['matched_institutions'])}"
+            reason = ", ".join(result["matched_institutions"])
             item = {**paper, "judged_at": judged_at, "reason": reason}
             published_items = store.add_relevant_item(published_items, item, window_size)
             log.info("INCLUDED %s (%s) - %s", paper["arxiv_id"], paper["title"][:70], reason)
 
-    log.info(
-        "%d of %d new papers included (%d via ledger, %d via pdf, %d pdf errors)",
-        included_count, len(new_papers), ledger_hits, pdf_hits, pdf_errors,
-    )
+    log.info("%d of %d new papers included (%d pdf errors)", included_count, len(new_papers), pdf_errors)
 
     store.save_json(REPO_DIR / paths["seen_ids"], seen_ids)
     store.save_json(REPO_DIR / paths["published_items"], published_items)
-    affiliation.save_researcher_ledger(REPO_DIR / paths["researcher_ledger"], ledger)
 
     feed_config = config["feed"]
     render.write_feed(
@@ -129,8 +115,6 @@ def main():
         "papers_fetched": len(papers),
         "new_papers": len(new_papers),
         "included": included_count,
-        "included_via_ledger": ledger_hits,
-        "included_via_pdf": pdf_hits,
         "pdf_errors": pdf_errors,
         "publish_success": success,
         "publish_message": message,
