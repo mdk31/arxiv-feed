@@ -10,7 +10,7 @@ import feedparser
 from lib.render import render_feed, write_feed, _parse_pubdate
 
 
-def make_item(arxiv_id, title="Title", authors="", published=""):
+def make_item(arxiv_id, title="Title", authors="", judged_at="2026-08-04T06:30:00+00:00"):
     return {
         "arxiv_id": arxiv_id,
         "title": title,
@@ -18,18 +18,18 @@ def make_item(arxiv_id, title="Title", authors="", published=""):
         "link": f"https://arxiv.org/abs/{arxiv_id}",
         "authors": authors,
         "category": "cs.CL",
-        "published": published,
-        "judged_at": "2026-08-04T06:30:00",
+        "published": "Wed, 08 Jul 2026 00:00:00 -0400",
+        "judged_at": judged_at,
         "reason": "on topic",
     }
 
 
 class ParsePubdateTests(unittest.TestCase):
-    def test_parses_rfc822_date(self):
-        dt = _parse_pubdate("Wed, 08 Jul 2026 00:00:00 -0400")
+    def test_parses_iso_date(self):
+        dt = _parse_pubdate("2026-08-07T01:38:49.123456+00:00")
         assert dt is not None
         self.assertEqual(dt.year, 2026)
-        self.assertEqual(dt.month, 7)
+        self.assertEqual(dt.month, 8)
 
     def test_empty_string_returns_none(self):
         self.assertIsNone(_parse_pubdate(""))
@@ -71,17 +71,27 @@ class RenderFeedTests(unittest.TestCase):
         parsed = feedparser.parse(xml_bytes)
         self.assertFalse(hasattr(parsed.entries[0], "author"))
 
-    def test_missing_published_omits_pubdate(self):
-        items = [make_item("2607.05398", published="")]
+    def test_missing_judged_at_omits_pubdate(self):
+        items = [make_item("2607.05398", judged_at="")]
         xml_bytes = render_feed(items, "Test Feed", "https://example.com/feed.xml", "desc")
         parsed = feedparser.parse(xml_bytes)
         self.assertFalse(hasattr(parsed.entries[0], "published"))
 
-    def test_present_published_included(self):
-        items = [make_item("2607.05398", published="Wed, 08 Jul 2026 00:00:00 -0400")]
+    def test_present_judged_at_included(self):
+        items = [make_item("2607.05398", judged_at="2026-08-07T01:38:49+00:00")]
         xml_bytes = render_feed(items, "Test Feed", "https://example.com/feed.xml", "desc")
         parsed = feedparser.parse(xml_bytes)
         self.assertTrue(hasattr(parsed.entries[0], "published"))
+
+    def test_distinct_items_get_distinct_pubdates(self):
+        items = [
+            make_item("a", judged_at="2026-08-07T01:00:00+00:00"),
+            make_item("b", judged_at="2026-08-07T02:00:00+00:00"),
+        ]
+        xml_bytes = render_feed(items, "Test Feed", "https://example.com/feed.xml", "desc")
+        parsed = feedparser.parse(xml_bytes)
+        dates = {e.published for e in parsed.entries}
+        self.assertEqual(len(dates), 2)
 
 
 class WriteFeedTests(unittest.TestCase):

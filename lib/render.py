@@ -1,14 +1,14 @@
 """Render the rolling list of relevant papers into an RSS 2.0 feed."""
-from email.utils import parsedate_to_datetime
+from datetime import datetime
 
 from feedgen.feed import FeedGenerator
 
 
-def _parse_pubdate(published):
-    if not published:
+def _parse_pubdate(judged_at):
+    if not judged_at:
         return None
     try:
-        return parsedate_to_datetime(published)
+        return datetime.fromisoformat(judged_at)
     except (TypeError, ValueError):
         return None
 
@@ -36,7 +36,7 @@ def render_feed(items, feed_title, feed_link, feed_description):
         # own feed, so readers pick it up as the item's real byline.
         if item.get("authors"):
             fe.dc.dc_creator(item["authors"])
-        pubdate = _parse_pubdate(item.get("published"))
+        pubdate = _parse_pubdate(item.get("judged_at"))
         if pubdate:
             fe.pubDate(pubdate)
 
