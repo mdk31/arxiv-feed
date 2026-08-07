@@ -7,6 +7,7 @@ import logging
 import sys
 import time
 from datetime import datetime, timezone
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import yaml
@@ -23,10 +24,11 @@ def load_config():
 
 def setup_logging(log_path):
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    file_handler = RotatingFileHandler(log_path, maxBytes=1_000_000, backupCount=3)
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(message)s",
-        handlers=[logging.FileHandler(log_path), logging.StreamHandler(sys.stdout)],
+        handlers=[file_handler, logging.StreamHandler(sys.stdout)],
     )
 
 
@@ -36,7 +38,15 @@ def write_last_run(path, summary):
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
 
+def truncate_launchd_logs():
+    for name in ("launchd.out.log", "launchd.err.log"):
+        path = REPO_DIR / "state" / name
+        if path.exists():
+            path.write_text("")
+
+
 def main():
+    truncate_launchd_logs()
     config = load_config()
     paths = config["paths"]
     setup_logging(REPO_DIR / paths["log_file"])
