@@ -4,20 +4,21 @@ categories:
   - cs.LG
   - stat.ML
 
-ollama:
-  host: http://localhost:11434
-  model: qwen2.5:3b-instruct
-  max_workers: 1
+affiliation:
+  institutions_file: institutions.yaml
+  pdf_fetch_delay_seconds: 3
+  pdf_fetch_timeout_seconds: 20
 
 paths:
-  interest_profile: interest_profile.md
   seen_ids: state/seen_ids.json
   published_items: state/published_items.json
+  researcher_ledger: state/researcher_ledger.json
   feed_output: published/feed.xml
   log_file: state/run.log
+  pdf_scratch_dir: state/pdf_scratch
 
 feed:
   title: "arxiv, filtered"
   link: "https://mdk31.github.io/arxiv-feed/published/feed.xml"
-  description: "Daily arxiv papers filtered for relevance by a local LLM"
+  description: "Daily arxiv papers filtered by author institutional affiliation"
   window_size: 150

@@ -1,0 +1,104 @@
+academic:
+  Carnegie Mellon University:
+    aliases: ["Carnegie Mellon", "CMU"]
+    domains: ["cmu.edu"]
+  Stanford University:
+    aliases: ["Stanford"]
+    domains: ["stanford.edu"]
+  MIT:
+    aliases: ["Massachusetts Institute of Technology", "MIT"]
+    domains: ["mit.edu", "csail.mit.edu"]
+  UC Berkeley:
+    aliases: ["UC Berkeley", "University of California, Berkeley", "University of California Berkeley"]
+    domains: ["berkeley.edu"]
+  Caltech:
+    aliases: ["Caltech", "California Institute of Technology"]
+    domains: ["caltech.edu"]
+  Cornell University:
+    aliases: ["Cornell University", "Cornell"]
+    domains: ["cornell.edu"]
+  Princeton University:
+    aliases: ["Princeton University", "Princeton"]
+    domains: ["princeton.edu"]
+  UT Austin:
+    aliases: ["UT Austin", "University of Texas at Austin", "University of Texas, Austin"]
+    domains: ["utexas.edu"]
+  UIUC:
+    aliases: ["UIUC", "University of Illinois Urbana-Champaign", "University of Illinois at Urbana-Champaign"]
+    domains: ["illinois.edu"]
+  University of Washington:
+    aliases: ["University of Washington"]
+    domains: ["washington.edu"]
+  Yale University:
+    aliases: ["Yale"]
+    domains: ["yale.edu"]
+  University of Chicago:
+    aliases: ["University of Chicago", "UChicago"]
+    domains: ["uchicago.edu"]
+  Johns Hopkins University:
+    aliases: ["Johns Hopkins", "JHU"]
+    domains: ["jhu.edu"]
+  Harvard University:
+    aliases: ["Harvard"]
+    domains: ["harvard.edu"]
+  University of Michigan:
+    aliases: ["University of Michigan", "UMich"]
+    domains: ["umich.edu"]
+  NC State University:
+    aliases: ["NC State", "North Carolina State"]
+    domains: ["ncsu.edu"]
+  Purdue University:
+    aliases:
+      - "Purdue University"
+      - text: "Purdue"
+        not_followed_by: [" Pharma"]
+    domains: ["purdue.edu"]
+
+industry:
+  Meta:
+    aliases:
+      - "Meta AI"
+      - "Meta FAIR"
+      - "Meta Superintelligence Labs"
+      - "Meta Platforms"
+      - text: "FAIR"
+        case_sensitive: true
+      - text: "Meta"
+        not_followed_by:
+          - "-"
+          - " Learning"
+          - " Analysis"
+          - " Reinforcement"
+          - " Review"
+          - " Cognitive"
+          - " Heuristic"
+          - " Model"
+          - " Training"
+          - " Testing"
+          - " Optimization"
+          - " RL"
+    domains: ["meta.com", "fb.com"]
+  Google:
+    aliases: ["Google DeepMind", "Google Research", "Google Inc", "Google, Inc", "Google"]
+    domains: ["google.com", "deepmind.com"]
+  OpenAI:
+    aliases: ["OpenAI", "Open AI"]
+    domains: ["openai.com"]
+  Anthropic:
+    aliases: ["Anthropic"]
+    domains: ["anthropic.com"]
+  Microsoft:
+    aliases: ["Microsoft", "Microsoft Research"]
+    domains: ["microsoft.com"]
+  ByteDance:
+    aliases: ["ByteDance", "Doubao", "ByteDance Seed"]
+    domains: ["bytedance.com"]
+  NVIDIA:
+    aliases: ["NVIDIA"]
+    domains: ["nvidia.com"]
+  Amazon:
+    aliases: ["Amazon Science", "AWS AI"]
+    domains: ["amazon.com"]
+  Apple:
+    aliases: ["Apple Inc", "Apple, Inc"]
+    domains: ["apple.com"]

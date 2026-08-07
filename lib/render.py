@@ -18,6 +18,7 @@ def render_feed(items, feed_title, feed_link, feed_description):
     already ordered newest-first. Returns RSS 2.0 XML as bytes.
     """
     fg = FeedGenerator()
+    fg.load_extension("dc")
     fg.title(feed_title)
     fg.link(href=feed_link, rel="self")
     fg.description(feed_description)
@@ -29,13 +30,12 @@ def render_feed(items, feed_title, feed_link, feed_description):
         fe.id(item["link"])
         fe.title(item["title"])
         fe.link(href=item["link"])
-        description = item.get("abstract", "")
-        # feedgen's author() only renders in RSS output given a valid email,
-        # which arxiv doesn't provide - fold authors into the body instead
-        # so they actually show up in the reader.
+        fe.description(item.get("abstract", ""))
+        # feedgen's author() only renders in RSS given a valid email, which
+        # arxiv doesn't provide - use dc:creator instead, same as arxiv's
+        # own feed, so readers pick it up as the item's real byline.
         if item.get("authors"):
-            description = f"{description}\n\nAuthors: {item['authors']}"
-        fe.description(description)
+            fe.dc.dc_creator(item["authors"])
         pubdate = _parse_pubdate(item.get("published"))
         if pubdate:
             fe.pubDate(pubdate)

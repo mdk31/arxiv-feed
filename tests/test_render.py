@@ -59,17 +59,17 @@ class RenderFeedTests(unittest.TestCase):
         ids = [e.link.split("/")[-1] for e in parsed.entries]
         self.assertEqual(ids, ["newer", "older"])
 
-    def test_authors_appear_in_description(self):
+    def test_authors_appear_as_dc_creator(self):
         items = [make_item("2607.05398", authors="Jane Doe, John Smith")]
         xml_bytes = render_feed(items, "Test Feed", "https://example.com/feed.xml", "desc")
         parsed = feedparser.parse(xml_bytes)
-        self.assertIn("Jane Doe, John Smith", parsed.entries[0].summary)
+        self.assertEqual(parsed.entries[0].author, "Jane Doe, John Smith")
 
-    def test_no_authors_omits_authors_line(self):
+    def test_no_authors_omits_author_field(self):
         items = [make_item("2607.05398", authors="")]
         xml_bytes = render_feed(items, "Test Feed", "https://example.com/feed.xml", "desc")
         parsed = feedparser.parse(xml_bytes)
-        self.assertNotIn("Authors:", parsed.entries[0].summary)
+        self.assertFalse(hasattr(parsed.entries[0], "author"))
 
     def test_missing_published_omits_pubdate(self):
         items = [make_item("2607.05398", published="")]

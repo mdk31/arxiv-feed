@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""Entrypoint: fetch arxiv -> dedupe -> judge via local LLM -> render feed -> publish."""
+"""Entrypoint: fetch arxiv -> dedupe -> filter by author institutional
+affiliation -> render feed -> publish.
+"""
+import json
 import logging
 import sys
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
 
-from lib import arxiv_fetch, classifier, publish, render, store
+from lib import affiliation, arxiv_fetch, publish, render, store
 
 REPO_DIR = Path(__file__).resolve().parent
 
@@ -27,9 +30,13 @@ def setup_logging(log_path):
     )
 
 
-def classify_one(profile_text, paper, host, model):
-    relevant, reason = classifier.classify(profile_text, paper["title"], paper["abstract"], host, model)
-    return paper, relevant, reason
+def write_last_run(path, summary):
+    """Overwritten every run - the one file to check for "did it run today"
+    without digging through the full run.log history.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2, ensure_ascii=False)
 
 
 def main():
@@ -37,9 +44,15 @@ def main():
     paths = config["paths"]
     setup_logging(REPO_DIR / paths["log_file"])
     log = logging.getLogger("arxiv-feed")
+    run_started_at = datetime.now(timezone.utc)
     log.info("=== run start ===")
 
-    profile_text = (REPO_DIR / paths["interest_profile"]).read_text(encoding="utf-8")
+    aff_config = config["affiliation"]
+    institutions = affiliation.load_institutions(REPO_DIR / aff_config["institutions_file"])
+    ledger = affiliation.load_researcher_ledger(REPO_DIR / paths["researcher_ledger"])
+    scratch_dir = REPO_DIR / paths["pdf_scratch_dir"]
+    pdf_timeout = aff_config["pdf_fetch_timeout_seconds"]
+    pdf_delay = aff_config["pdf_fetch_delay_seconds"]
 
     seen_ids = store.load_json(REPO_DIR / paths["seen_ids"], {})
     published_items = store.load_json(REPO_DIR / paths["published_items"], [])
@@ -54,33 +67,44 @@ def main():
         len(papers), len(papers) - len(new_papers), len(new_papers),
     )
 
-    host = config["ollama"]["host"]
-    model = config["ollama"]["model"]
-    max_workers = config["ollama"].get("max_workers", 4)
     window_size = config["feed"]["window_size"]
 
-    relevant_count = 0
-    if new_papers:
-        with ThreadPoolExecutor(max_workers=max_workers) as pool:
-            futures = [pool.submit(classify_one, profile_text, paper, host, model) for paper in new_papers]
-            for future in as_completed(futures):
-                try:
-                    paper, relevant, reason = future.result()
-                except Exception as exc:  # noqa: BLE001 - fail closed, retried automatically next run
-                    log.warning("classification failed, leaving unseen for retry next run: %s", exc)
-                    continue
+    included_count = 0
+    ledger_hits = 0
+    pdf_hits = 0
+    pdf_errors = 0
 
-                judged_at = datetime.now(timezone.utc).isoformat()
-                store.record_seen(seen_ids, paper["arxiv_id"], relevant, judged_at)
-                if relevant:
-                    relevant_count += 1
-                    item = {**paper, "judged_at": judged_at, "reason": reason}
-                    published_items = store.add_relevant_item(published_items, item, window_size)
+    for paper in new_papers:
+        result = affiliation.check_affiliation(paper, institutions, ledger, scratch_dir, timeout=pdf_timeout)
 
-    log.info("%d of %d new papers judged relevant", relevant_count, len(new_papers))
+        if result["via"] == "pdf":
+            time.sleep(pdf_delay)  # only real downloads get rate-limited, ledger hits are free
+            if result["error"]:
+                pdf_errors += 1
+                log.warning("pdf fetch/parse failed for %s, leaving unseen for retry next run: %s", paper["arxiv_id"], result["error"])
+                continue  # not recorded as seen - retried next run
+            pdf_hits += 1 if result["included"] else 0
+        elif result["via"] == "ledger":
+            ledger_hits += 1
+
+        judged_at = datetime.now(timezone.utc).isoformat()
+        store.record_seen(seen_ids, paper["arxiv_id"], result["included"], judged_at)
+
+        if result["included"]:
+            included_count += 1
+            reason = f"{result['via']}: {', '.join(result['matched_institutions'])}"
+            item = {**paper, "judged_at": judged_at, "reason": reason}
+            published_items = store.add_relevant_item(published_items, item, window_size)
+            log.info("INCLUDED %s (%s) - %s", paper["arxiv_id"], paper["title"][:70], reason)
+
+    log.info(
+        "%d of %d new papers included (%d via ledger, %d via pdf, %d pdf errors)",
+        included_count, len(new_papers), ledger_hits, pdf_hits, pdf_errors,
+    )
 
     store.save_json(REPO_DIR / paths["seen_ids"], seen_ids)
     store.save_json(REPO_DIR / paths["published_items"], published_items)
+    affiliation.save_researcher_ledger(REPO_DIR / paths["researcher_ledger"], ledger)
 
     feed_config = config["feed"]
     render.write_feed(
@@ -93,11 +117,24 @@ def main():
     log.info("wrote feed with %d items to %s", len(published_items), paths["feed_output"])
 
     success, message = publish.commit_and_push(
-        str(REPO_DIR), paths["feed_output"], f"update feed: {relevant_count} new relevant papers"
+        str(REPO_DIR), paths["feed_output"], f"update feed: {included_count} new relevant papers"
     )
     log.log(logging.INFO if success else logging.ERROR, "publish: %s", message)
 
     log.info("=== run end ===")
+
+    write_last_run(REPO_DIR / "state" / "last_run.json", {
+        "started_at": run_started_at.isoformat(),
+        "finished_at": datetime.now(timezone.utc).isoformat(),
+        "papers_fetched": len(papers),
+        "new_papers": len(new_papers),
+        "included": included_count,
+        "included_via_ledger": ledger_hits,
+        "included_via_pdf": pdf_hits,
+        "pdf_errors": pdf_errors,
+        "publish_success": success,
+        "publish_message": message,
+    })
 
 
 if __name__ == "__main__":
