@@ -7,7 +7,7 @@
     <atom:link href="https://mdk31.github.io/arxiv-feed/published/feed.xml" rel="self"/>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Sat, 15 Aug 2026 11:56:42 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2026 10:39:42 +0000</lastBuildDate>
     <item>
       <title>It's How You Ask: Gender-Associated Linguistic Bias in LLMs</title>
       <link>https://arxiv.org/abs/2608.13328</link>
