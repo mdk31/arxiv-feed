@@ -7,7 +7,7 @@
     <atom:link href="https://mdk31.github.io/arxiv-feed/published/feed.xml" rel="self"/>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Tue, 18 Aug 2026 11:14:41 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 00:13:08 +0000</lastBuildDate>
     <item>
       <title>Biophysics-informed deep operator learning for inverse problems with application to electrophysiological source reconstruction</title>
       <link>https://arxiv.org/abs/2608.16871</link>
@@ -342,14 +342,6 @@
       <dc:creator>Xiaoyu Zhu, Xinke Deng, Suresh Taddewadikar, Arnab Kumar Mondal, Zhongyu Jiang, Ian Fasel, Joerg Liebelt</dc:creator>
     </item>
     <item>
-      <title>CardiacMamba: Fair and Robust RGB-RF Fusion for Remote Heart Rate Estimation via State Space Modeling</title>
-      <link>https://arxiv.org/abs/2608.15831</link>
-      <description>Remote photoplethysmography (rPPG) enables non-contact heart rate (HR) monitoring from facial videos, but RGB-only methods are vulnerable to illumination changes, motion artifacts, and skin-tone-dependent optical reflectance. We propose CardiacMamba, a fair and robust RGB-RF fusion framework that integrates optical facial cues and radio-frequency cardiac motion cues through state space modeling. CardiacMamba introduces a Temporal Difference Mamba Module (TDMM) to enhance subtle RF temporal variations, a bidirectional SSM-based interaction mechanism to align heterogeneous RGB-RF dynamics, and a Channel-wise Fast Fourier Transform (CFFT) module for channel-domain spectral refinement. On the EquiPleth dataset, CardiacMamba achieves state-of-the-art performance with 0.96 bpm MAE, 3.06 bpm RMSE, and 0.97 Pearson correlation, while reducing the observed light-dark skin-tone MAE gap to 0.26 bpm and maintaining robustness under RGB degradation and RF-missing conditions</description>
-      <guid isPermaLink="false">https://arxiv.org/abs/2608.15831</guid>
-      <pubDate>Tue, 18 Aug 2026 10:50:53 +0000</pubDate>
-      <dc:creator>Bo Zhao, Zheng Wu, Yiping Xie, Zitong YU</dc:creator>
-    </item>
-    <item>
       <title>Decomposing Staleness in Recommender Systems: A Dual-Filter Framework for Supersession and Decay</title>
       <link>https://arxiv.org/abs/2608.15780</link>
       <description>Stale recommendations are a pervasive challenge and a leading source of user complaints on large-scale content platforms. Items lose relevance through two primary mechanisms: supersession, where emerging updates render prior coverage stale, and relevance decay, where an item's informational value naturally diminishes over its lifecycle. Traditional countermeasures serve as crude proxies: age cutoffs poorly reflect actual relevance loss, while engagement heuristics rely on lagging signals, broadly exposing users to stale content before the system adapts.
@@ -408,14 +400,6 @@
       <dc:creator>Zsombor B\'anfi, Andr\'as G\'ezsi, Andr\'as Formanek</dc:creator>
     </item>
     <item>
-      <title>MetaReason: Precise Interleaved Multimodal Reasoning via Editing Meta Information for Solving Geometry Problems</title>
-      <link>https://arxiv.org/abs/2608.15006</link>
-      <description>Although visual reasoning is crucial for solving complex geometry tasks, existing vision-language models rely heavily on text-only reasoning. Some recent methods introduce intermediate visual states to facilitate reasoning, but they are often hindered by inaccurate geometric representations and low rendering fidelity, ultimately leading to unreliable outputs. To address these limitations, we propose MetaReason, a framework for multimodal reasoning in plane geometry that leverages structured meta-information to enable accurate auxiliary-line construction. The framework first parses geometric images into meta-information, performs controllable edits with predefined tools to synthesize high-fidelity visual states, and then conducts reasoning based on these augmented views. To support this framework, we construct TutorGeo, a comprehensive dataset containing 17k image-to-meta conversion samples, 60k text-only reasoning traces, and 60k interleaved multimodal reasoning traces. Using this dataset, we combine supervised fine-tuning and reinforcement learning to develop robust multimodal reasoning capabilities. We also introduce ExamGeo, a benchmark derived from real-world examination problems that enables systematic evaluation across varying difficulty levels. Experimental results demonstrate that MetaReason significantly outperforms existing open-source models and achieves competitive performance against proprietary models.</description>
-      <guid isPermaLink="false">https://arxiv.org/abs/2608.15006</guid>
-      <pubDate>Tue, 18 Aug 2026 10:46:18 +0000</pubDate>
-      <dc:creator>Penghao Yin, Haomin Wang, Qihong Tang, Xiaoye Qu, Hongjie Zhang, Xiao-Ping Zhang</dc:creator>
-    </item>
-    <item>
       <title>Generative data assimilation highlights fronts as key regulators of ocean energy cascade</title>
       <link>https://arxiv.org/abs/2608.14955</link>
       <description>Mesoscale eddies are fundamental to the ocean circulation, yet the extent to which submesoscale motions, a few kilometers across, influence mesoscale eddy energetics through a kinetic energy cascade remains uncertain. High-resolution simulations predict that submesoscale fronts are key regulators of the cascade, transferring energy both downscale towards dissipation and upscale to sustain and shape the seasonality of mesoscale eddies. Testing these predictions has remained difficult because existing observations and state estimates cannot resolve submesoscale currents over sufficiently broad domains. Here we map the ocean's submesoscale energy cascade by combining multi-source satellite observations with a generative deep learning framework, reconstructing gap-free, kilometer-scale surface currents with physically plausible dynamics learned from simulations. Applying this to the eddy-rich Agulhas Current system, we find that submesoscales energize the mesoscale through an upscale energy cascade above 10 km, contributing to the seasonality of mesoscale eddies. Below 10 km, convergence at submesoscale fronts drives a downscale cascade towards dissipation. Both upscale and downscale pathways concentrate within fronts, where cross-scale transfer is up to an order of magnitude more efficient. Despite their limited extent, fronts account for a substantial fraction of the domain-integrated cascade, establishing them as key regulators of the cascade and targets for next-generation eddy parameterizations.</description>
@@ -470,14 +454,6 @@
       <guid isPermaLink="false">https://arxiv.org/abs/2608.14652</guid>
       <pubDate>Tue, 18 Aug 2026 10:43:23 +0000</pubDate>
       <dc:creator>Yang Zhao, Peisong Niu, Tian Zhou, Ziqing Ma, Guanlong Ma, Rong Jin, Huiling Yuan, Liang Sun</dc:creator>
-    </item>
-    <item>
-      <title>iFuzz-Meta: An Interpretable Fuzzy Learning Framework Bridging Top-Down and Bottom-Up Knowledge Integration</title>
-      <link>https://arxiv.org/abs/2608.14646</link>
-      <description>Interpretable representation learning remains a key challenge in modern neural computation, particularly when models are expected not only to perform but also to explain their reasoning. This paper introduces iFuzz-Meta, an interpretable fuzzy rule-based learning framework that preserves human-understandable reasoning structures within modern neural architectures. Each fuzzy rule corresponds to a semantic and spatial prototype defined in the original feature space, enabling transparent inference and direct interpretability. Meta-learning is employed as an analytical paradigm to examine how these interpretable rules reorganize across tasks and domains, providing a principled means to link algorithmic adaptation with cognitive representation. A knowledge-guided regularization mechanism further enables a top-down-bottom-up integration, in which theoretical priors act as soft inductive biases while data-driven learning refines and extends them. This dual process ensures that adaptation proceeds along semantically and physiologically meaningful trajectories, rather than arbitrary parameter shifts. Evaluations demonstrate that iFuzz-Meta achieves interpretable reasoning and stable cross-domain generalization, establishing a potential general pathway toward explainable and knowledge-aware fuzzy systems.</description>
-      <guid isPermaLink="false">https://arxiv.org/abs/2608.14646</guid>
-      <pubDate>Tue, 18 Aug 2026 10:43:11 +0000</pubDate>
-      <dc:creator>Xiaowei Jiang, Daniel Leong, Beining Cao, Nan Zhou, Yingtao Ren, Yu-Cheng Chang, Thomas Do, Chin-Teng Lin</dc:creator>
     </item>
     <item>
       <title>Characterizing Rhetorical Misalignment in Decision-Making with Language Models</title>
@@ -686,14 +662,6 @@
       <guid isPermaLink="false">https://arxiv.org/abs/2608.14585</guid>
       <pubDate>Tue, 18 Aug 2026 10:30:57 +0000</pubDate>
       <dc:creator>Zhaoyu Li, Hangrui Bi, Youyuan Zhang, Wenjie Ma, Zenan Li, Zhaolei Zhang, Xujie Si, Kaiyu Yang</dc:creator>
-    </item>
-    <item>
-      <title>Global AI Regulations for FAIR and Ethics in High-Risk Use Cases: A Comparative Review</title>
-      <link>https://arxiv.org/abs/2608.14562</link>
-      <description>AI governance is shifting from voluntary ethics to enforceable, risk-based regulation, yet cross-jurisdictional divergence creates compliance uncertainty for operators of high-stakes AI. We present a comparative matrix for the EU, US, and China that maps (i) risk classification triggers, (ii) binding obligations, (iii) enforcement and accountability mechanisms, and (iv) the degree to which FAIR principles are operationalised in practice. We stress-test the matrix on three high-impact domains: Electroencephalography (EEG)-guided rehabilitation robotics, AI-enabled debt collection in prospective Central Bank Digital Currency (CBDC) ecosystems, and AI-driven allocation of scarce Graphics Processing Unit (GPU) resources in emerging AI Factory infrastructures. Using primary legal texts and implementation evidence, we identify three recurring gaps: weak interoperability mandates, difficult operationalisation of cross-regime obligations (AI + sector regulation + data protection), and under-specified governance for critical digital infrastructure use cases. To bridge the implementation gap, we outline Knowledge Blocks, a machine-checkable compliance artefact pattern based on Resource Description Framework/Web Ontology Language (RDF/OWL), Shapes Constraint Language (SHACL), and Provenance Ontology (PROV-O), enabling audit-ready compliance-by-design across multiple regimes.</description>
-      <guid isPermaLink="false">https://arxiv.org/abs/2608.14562</guid>
-      <pubDate>Tue, 18 Aug 2026 10:30:23 +0000</pubDate>
-      <dc:creator>Aasish Kumar Sharma, Dimitar Koysev, Christopher Anich, Roshni Kumari Ojha, Julian Kunkel</dc:creator>
     </item>
     <item>
       <title>Semi-supervised Concordance Learning for Optimal Individual Treatment Regimes</title>
