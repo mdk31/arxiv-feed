@@ -7,7 +7,7 @@
     <atom:link href="https://mdk31.github.io/arxiv-feed/published/feed.xml" rel="self"/>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Mon, 12 Oct 2026 18:11:21 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 10:30:07 +0000</lastBuildDate>
     <item>
       <title>Semiparametric Regression Based on Zero Altered Models</title>
       <link>https://arxiv.org/abs/2610.12812</link>
