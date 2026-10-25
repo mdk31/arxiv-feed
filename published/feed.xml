@@ -7,7 +7,7 @@
     <atom:link href="https://mdk31.github.io/arxiv-feed/published/feed.xml" rel="self"/>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Sat, 24 Oct 2026 13:08:09 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 10:32:38 +0000</lastBuildDate>
     <item>
       <title>Beyond Watching and Searching: Benchmarking Agents for Video-centered Deep Research Reports</title>
       <link>https://arxiv.org/abs/2610.31158</link>
