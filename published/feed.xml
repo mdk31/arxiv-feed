@@ -7,7 +7,7 @@
     <atom:link href="https://mdk31.github.io/arxiv-feed/published/feed.xml" rel="self"/>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Fri, 30 Oct 2026 11:15:23 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 10:30:07 +0000</lastBuildDate>
     <item>
       <title>Beyond $\chi^2$: Ensemble null tests for reliable scientific discovery</title>
       <link>https://arxiv.org/abs/2610.40167</link>
